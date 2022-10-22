@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
+using VeglegesFilmKolcsonzo.View;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -35,8 +36,6 @@ namespace VeglegesFilmKolcsonzo
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
-            DBHelper.getData();
         }
 
         /// <summary>
@@ -73,7 +72,7 @@ namespace VeglegesFilmKolcsonzo
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(LoginPage), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
