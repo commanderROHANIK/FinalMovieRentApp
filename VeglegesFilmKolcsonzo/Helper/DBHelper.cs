@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
-
+using VeglegesFilmKolcsonzo.Helper;
 using VeglegesFilmKolcsonzo.Model;
 
 namespace VeglegesFilmKolcsonzo
@@ -15,14 +15,15 @@ namespace VeglegesFilmKolcsonzo
     public static class DBHelper
     {
         const string serverConnection = "server=127.0.0.1;user id=root;password=;database=filmek";
+        const string getAllMoviesQuery = "select * from data_2004";
 
-        public static void getData()
+        public static void getAllMovies()
         {
             var movies = new List<Movie>();
 
             using (var sqlConnection = new MySqlConnection(serverConnection))
             {
-                using (var sqlQuery = new MySqlCommand("select * from data_2004", sqlConnection))
+                using (var sqlQuery = new MySqlCommand(getAllMoviesQuery, sqlConnection))
                 {
                     sqlConnection.Open();
                     using (MySqlDataReader mySqlReader = sqlQuery.ExecuteReader(CommandBehavior.CloseConnection))
@@ -49,8 +50,46 @@ namespace VeglegesFilmKolcsonzo
                     }
                 }
             }
+        }
 
-            Console.WriteLine("kesz");
+        public static IEnumerable<User> getAllUsers()
+        {
+            var users = new List<User>();
+
+            using (var sqlConnection = new MySqlConnection(serverConnection))
+            {
+                using (var sqlQuery = new MySqlCommand("select * from users", sqlConnection))
+                {
+                    sqlConnection.Open();
+                    using (MySqlDataReader mySqlReader = sqlQuery.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (mySqlReader.Read())
+                        {
+                            var user = new User();
+                            user.Id = Convert.ToInt32(mySqlReader.GetString(0));
+                            user.Name = mySqlReader.GetString(1);
+                            user.Password = mySqlReader.GetString(2);
+                            
+                            users.Add(user);
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }
+
+        public static void addUser(string userName, string password)
+        {
+            using (var sqlConnection = new MySqlConnection(serverConnection))
+            {
+                using (var sqlQuery = new MySqlCommand($"INSERT INTO `users`(`username`, `password`) VALUES ('{userName}','{MD5Helper.CreateMD5(password)}')", sqlConnection))
+                {
+                    sqlConnection.Open();
+                    sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
+                    sqlConnection.Close();
+                }
+            }
         }
     }
 }

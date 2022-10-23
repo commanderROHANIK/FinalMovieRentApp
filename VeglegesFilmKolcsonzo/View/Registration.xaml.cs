@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Org.BouncyCastle.Crypto.Digests;
-using VeglegesFilmKolcsonzo.Helper;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,34 +20,19 @@ namespace VeglegesFilmKolcsonzo.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LoginPage : Page
+    public sealed partial class Registration : Page
     {
-        private Frame rootFrame = Window.Current.Content as Frame;
-
-        public LoginPage()
+        public Registration()
         {
             this.InitializeComponent();
         }
 
-        void Login(object sender, RoutedEventArgs e)
+        void Registrate(object sender, RoutedEventArgs e)
         {
-            var usrs = DBHelper.getAllUsers();
-            var md5 = "";
-
-            foreach (var user in usrs)
+            if (Password.Password.Equals(PasswordAgain.Password))
             {
-                if (user.Name.Equals(Username.Text) && user.Password.Equals(MD5Helper.CreateMD5(Password.Password)))
-                {
-                    rootFrame.Navigate(typeof(MainPage));
-                    break;
-                }
+                DBHelper.addUser(Username.Text, Password.Password);
             }
-        }
-
-        void Registration(object sender, RoutedEventArgs e)
-        {
-            rootFrame.Navigate(typeof(Registration));
         }
     }
 }
-
