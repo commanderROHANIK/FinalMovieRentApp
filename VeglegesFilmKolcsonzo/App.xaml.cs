@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
+using VeglegesFilmKolcsonzo.Model;
 using VeglegesFilmKolcsonzo.View;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -27,6 +28,7 @@ namespace VeglegesFilmKolcsonzo
     /// </summary>
     sealed partial class App : Application
     {
+        public static User logedInUser;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
