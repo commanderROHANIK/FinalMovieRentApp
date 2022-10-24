@@ -20,11 +20,19 @@ namespace VeglegesFilmKolcsonzo.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Login : Page
+    public sealed partial class Registration : Page
     {
-        public Login()
+        public Registration()
         {
             this.InitializeComponent();
+        }
+
+        void Registrate(object sender, RoutedEventArgs e)
+        {
+            if (Password.Password.Equals(PasswordAgain.Password))
+            {
+                DBHelper.addUser(Username.Text, Password.Password);
+            }
         }
     }
 }
