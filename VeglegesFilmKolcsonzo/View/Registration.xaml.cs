@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using VeglegesFilmKolcsonzo.DAO;
 using VeglegesFilmKolcsonzo.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,8 +24,11 @@ namespace VeglegesFilmKolcsonzo.View
     /// </summary>
     public sealed partial class Registration : Page
     {
+        IUserDAO userDAO;
+
         public Registration()
         {
+            userDAO = new UserDAO();
             this.InitializeComponent();
         }
 
@@ -32,7 +36,7 @@ namespace VeglegesFilmKolcsonzo.View
         {
             if (Password.Password.Equals(PasswordAgain.Password))
             {
-                User.addUser(Username.Text, Password.Password);
+                userDAO.addUser(Username.Text, Password.Password);
             }
         }
     }

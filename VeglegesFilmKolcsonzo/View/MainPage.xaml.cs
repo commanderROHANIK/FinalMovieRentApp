@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using VeglegesFilmKolcsonzo.DAO;
 using VeglegesFilmKolcsonzo.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -20,20 +21,22 @@ namespace VeglegesFilmKolcsonzo
 {
     public sealed partial class MainPage : Page
     {
-        private const int NUMBER_OF_COLLUMNS = 5;
+        private IMoviesDAO moviesDAO;
         private int columnIndex = 0;
         private int rowIndex = 0;
+        private const int NUMBER_OF_COLLUMNS = 5;
 
         public MainPage()
         {
-            this.InitializeComponent();
+            moviesDAO = new MoviesDAO();
 
+            this.InitializeComponent();
             LayoutDesign();   
         }
 
         private void LayoutDesign()
         {
-            var movies = Movie.getAllMovies();
+            var movies = moviesDAO.getAllMovies();
 
             foreach (Movie movie in movies)
             {
