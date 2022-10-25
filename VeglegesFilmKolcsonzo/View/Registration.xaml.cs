@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using VeglegesFilmKolcsonzo.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -31,7 +32,7 @@ namespace VeglegesFilmKolcsonzo.View
         {
             if (Password.Password.Equals(PasswordAgain.Password))
             {
-                DBHelper.addUser(Username.Text, Password.Password);
+                User.addUser(Username.Text, Password.Password);
             }
         }
     }

@@ -22,7 +22,7 @@ namespace VeglegesFilmKolcsonzo.Model
 
         private const string serverConnection = "server=127.0.0.1;user id=root;password=;database=filmek";
 
-        public static void getAllMovies()
+        public static IEnumerable<Movie> getAllMovies()
         {
             var movies = new List<Movie>();
 
@@ -55,6 +55,8 @@ namespace VeglegesFilmKolcsonzo.Model
                     }
                 }
             }
+
+            return movies;
         }
     }
 }
