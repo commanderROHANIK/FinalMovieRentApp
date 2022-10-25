@@ -116,6 +116,10 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DAO\IMoviesDAO.cs" />
+    <Compile Include="DAO\IUserDAO.cs" />
+    <Compile Include="DAO\MoviesDAO.cs" />
+    <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Helper\MD5Helper.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="App.xaml.cs">
