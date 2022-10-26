@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Org.BouncyCastle.Crypto.Digests;
+using VeglegesFilmKolcsonzo.DAO;
 using VeglegesFilmKolcsonzo.Helper;
 using VeglegesFilmKolcsonzo.Model;
 using Windows.Foundation;
@@ -23,15 +24,18 @@ namespace VeglegesFilmKolcsonzo.View
     public sealed partial class LoginPage : Page
     {
         private Frame rootFrame = Window.Current.Content as Frame;
+        private IUserDAO userDAO;
 
         public LoginPage()
         {
+            userDAO = new UserDAO();
+
             this.InitializeComponent();
         }
 
         async void Login(object sender, RoutedEventArgs e)
         {
-            var users = User.getAllUsers();
+            var users = userDAO.getAllUsers();
 
             try
             {
